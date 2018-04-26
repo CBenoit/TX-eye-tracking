@@ -1,12 +1,18 @@
-cmake_minimum_required(VERSION 3.9)
-project(TX_eye_tracking)
+project(TX_Eye_tracker)
+cmake_minimum_required(VERSION 2.8)
+
+find_package( OpenCV REQUIRED )
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_compile_options("-DNDEBUG")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
+set(CMAKE_BINARY_DIR ${PROJECT_BINARY_DIR}/bin)
 
-find_package( OpenCV REQUIRED )
-include_directories( ${OpenCV_INCLUDE_DIRS} )
+include_directories(include)
 
-add_executable(TX_eye_tracking main.cpp)
-target_link_libraries(TX_eye_tracking ${OpenCV_LIBS} )
+add_executable(TX_Eye_tracker
+        src/main.cpp
+        src/eye_finder.cpp
+        )
+
+target_link_libraries(TX_Eye_tracker ${OpenCV_LIBS})
