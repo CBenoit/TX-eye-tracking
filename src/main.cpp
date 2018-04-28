@@ -43,7 +43,7 @@ int main(int, const char*[]) {
 
 		}
 	}
-	
+
 	return 0;
 }
 
@@ -83,8 +83,9 @@ void process(const matrix<unsigned char>& pic, face f) {
 				}
 			}
 		}
-	}
-
+	} else if (t == 27) {
+        exit(0);
+    }
 
 	f.eyes.first.eye_position.x += f.face_region.x;
 	f.eyes.first.eye_position.y += f.face_region.y;
