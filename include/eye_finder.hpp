@@ -30,18 +30,19 @@ struct face {
 class eye_finder {
 
 public:
-	explicit eye_finder(const std::string& face_cascade_file) : face_classifier_{} {
-		if (!face_classifier_.load(face_cascade_file)) {
-			throw std::runtime_error("Failed to load " + face_cascade_file);
+	explicit eye_finder(std::string_view face_cascade_file) : face_classifier_{} {
+		if (!face_classifier_.load(face_cascade_file.data())) {
+			using namespace std::literals;
+			throw std::runtime_error("Failed to load "s + face_cascade_file.data());
 		}
 	}
 
 	std::optional<face> find_eyes(const matrix<unsigned char>& picture, const std::optional<face>& previous_face = {});
 
+private:
+
 	void cast_centers_rays(cv::Point point, const matrix<unsigned char>& weights, twin_el<double> gradient,
 	                       matrix<double>& out);
-
-private:
 
 	// Finds a face (does not detect eyes)
 	std::optional<std::pair<matrix<unsigned char>, face>> find_face(const matrix<unsigned char>& picture);

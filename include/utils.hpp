@@ -6,7 +6,7 @@
 matrix<unsigned char> rescale(const matrix<unsigned char>& original);
 
 // Undo the op for one point
-cv::Point unsale_pt(cv::Point p, const cv::Rect& original_size);
+cv::Point unscale_pt(cv::Point p, const cv::Rect& original_size);
 
 template <typename T>
 constexpr bool is_in(cv::Point p, const matrix<T>& mat);
@@ -17,7 +17,7 @@ double compute_threshold(const matrix<double>& magnitude, double stdDevFactor);
 
 
 struct less_cmp {
-	bool operator()(const std::pair<cv::Point, float>& lhs, const std::pair<cv::Point, float>& rhs) {
+	bool operator()(const std::pair<cv::Point, float>& lhs, const std::pair<cv::Point, float>& rhs) const {
 		return lhs.first.x != rhs.first.x ? lhs.first.x < rhs.first.x : lhs.first.y < rhs.first.y;
 	}
 };
